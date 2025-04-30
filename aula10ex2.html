@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste de Promise com Erro Aleatório</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    .sucesso {
+      color: green;
+    }
+    .erro {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Teste de Promise com Erro Aleatório</h1>
+  <button onclick="testarPromessa()">Testar Promessa</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function promessaComErro() {
+      return new Promise((resolve, reject) => {
+        const chanceDeErro = Math.random();
+
+        setTimeout(() => {
+          if (chanceDeErro < 0.5) {
+            reject("Erro simulado!");
+          } else {
+            resolve("Sucesso! Tudo ocorreu como esperado.");
+          }
+
+          //// professor para forçar o erro tire do coimentario  e substitua acima reject("Erro simulado!");
+
+        }, 1000);
+      });
+    }
+
+    function testarPromessa() {
+      const resultado = document.getElementById("resultado");
+      resultado.textContent = "Executando...";
+      resultado.className = "";
+
+      promessaComErro()
+        .then(mensagem => {
+          resultado.textContent = mensagem;
+          resultado.className = "sucesso";
+        })
+        .catch(erro => {
+          resultado.textContent = erro;
+          resultado.className = "erro";
+        });
+    }
+  </script>
+
+</body>
+</html>

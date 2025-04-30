@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Esperar Segundos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: white;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+
+    #output {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Esperar com Promessa</h1>
+  <button onclick="iniciarEspera()">Esperar 2 segundos</button>
+  <div id="output"></div>
+
+  <script>
+    function esperarSegundos(segundos) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(`Esperei ${segundos} segundos`);
+        }, segundos * 1000);
+      });
+    }
+
+    async function iniciarEspera() {
+      const output = document.getElementById("output");
+      output.innerText = "Esperando...";
+      const mensagem = await esperarSegundos(2);
+      output.innerText = mensagem;
+    }
+  </script>
+</body>
+
+</html>
